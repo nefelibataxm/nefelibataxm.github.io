@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>first blog | Hexo</title>
+  <title>MySQL整理 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="一、Linux部署MySQL1.解压及创建目录123456789101112131415[root@localhost ~]# ll-rw-r--r--. 1 root root 548193637 5月   1 14:36 mysql-5.7.11-linux-glibc2.5-x86_64.tar.gz#移动压缩包到&#x2F;usr&#x2F;local目录下[root@localhost ~]# mv mys">
 <meta property="og:type" content="article">
-<meta property="og:title" content="first blog">
-<meta property="og:url" content="http://yoursite.com/2020/04/30/index/index.html">
+<meta property="og:title" content="MySQL整理">
+<meta property="og:url" content="http://yoursite.com/2020/05/03/MySQL/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="一、Linux部署MySQL1.解压及创建目录123456789101112131415[root@localhost ~]# ll-rw-r--r--. 1 root root 548193637 5月   1 14:36 mysql-5.7.11-linux-glibc2.5-x86_64.tar.gz#移动压缩包到&#x2F;usr&#x2F;local目录下[root@localhost ~]# mv mys">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-04-30T03:47:19.565Z">
-<meta property="article:modified_time" content="2020-04-30T04:20:43.473Z">
+<meta property="article:published_time" content="2020-05-03T07:03:09.599Z">
+<meta property="article:modified_time" content="2020-05-06T03:05:15.316Z">
 <meta property="article:author" content="xmzhou">
 <meta name="twitter:card" content="summary">
   
@@ -154,39 +154,506 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-index" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-MySQL" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      first blog
+      MySQL整理
     </h1>
   
 
         
-        <a href="/2020/04/30/index/" class="archive-article-date">
-  	<time datetime="2020-04-30T03:47:19.565Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-30</time>
+        <a href="/2020/05/03/MySQL/" class="archive-article-date">
+  	<time datetime="2020-05-03T07:03:09.599Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-03</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+        <h2 id="一、Linux部署MySQL"><a href="#一、Linux部署MySQL" class="headerlink" title="一、Linux部署MySQL"></a>一、Linux部署MySQL</h2><h3 id="1-解压及创建目录"><a href="#1-解压及创建目录" class="headerlink" title="1.解压及创建目录"></a>1.解压及创建目录</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ll</span><br><span class="line">-rw-r--r--. 1 root root 548193637 5月   1 14:36 mysql-5.7.11-linux-glibc2.5-x86_64.tar.gz</span><br><span class="line"><span class="meta">#</span><span class="bash">移动压缩包到/usr/<span class="built_in">local</span>目录下</span></span><br><span class="line">[root@localhost ~]# mv mysql-5.7.11-linux-glibc2.5-x86_64.tar.gz /usr/local/</span><br><span class="line"><span class="meta">#</span><span class="bash">解压mysql</span></span><br><span class="line">[root@localhost local]# tar -zxvf mysql-5.7.11-linux-glibc2.5-x86_64.tar.gz</span><br><span class="line">[root@localhost local]# mv mysql-5.7.11-linux-glibc2.5-x86_64 mysql</span><br><span class="line">[root@localhost local]# ll</span><br><span class="line">drwxr-xr-x. 9 7161 wheel       129 2月   2 2016 mysql</span><br><span class="line"><span class="meta">#</span><span class="bash">注意 解压后用户和用户组发生了变化，必须更改</span></span><br><span class="line">[root@localhost local]# chown -R root:root mysql</span><br><span class="line">[root@localhost local]# ll</span><br><span class="line">drwxr-xr-x. 9 root root       129 2月   2 2016 mysql</span><br><span class="line"><span class="meta">#</span><span class="bash">创建对应的目录</span></span><br><span class="line">[root@localhost local]# mkdir mysql/arch mysql/data mysql/tmp</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<h3 id="2-创建my-cnf"><a href="#2-创建my-cnf" class="headerlink" title="2.创建my.cnf"></a>2.创建my.cnf</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br></pre></td><td class="code"><pre><span class="line">root@localhost mysql]# vi /etc/my.cnf</span><br><span class="line">[client]</span><br><span class="line">port            = 3306</span><br><span class="line">socket          = /usr/local/mysql/data/mysql.sock</span><br><span class="line">default-character-set=utf8mb4</span><br><span class="line"></span><br><span class="line">[mysqld]</span><br><span class="line">port            = 3306</span><br><span class="line">socket          = /usr/local/mysql/data/mysql.sock</span><br><span class="line"></span><br><span class="line">skip-slave-start</span><br><span class="line"></span><br><span class="line">skip-external-locking</span><br><span class="line">key_buffer_size = 256M</span><br><span class="line">sort_buffer_size = 2M</span><br><span class="line">read_buffer_size = 2M</span><br><span class="line">read_rnd_buffer_size = 4M</span><br><span class="line">query_cache_size= 32M</span><br><span class="line">max_allowed_packet = 16M</span><br><span class="line">myisam_sort_buffer_size=128M</span><br><span class="line">tmp_table_size=32M</span><br><span class="line"></span><br><span class="line">table_open_cache = 512</span><br><span class="line">thread_cache_size = 8</span><br><span class="line">wait_timeout = 86400</span><br><span class="line">interactive_timeout = 86400</span><br><span class="line">max_connections = 600</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Try number of CPU<span class="string">'s*2 for thread_concurrency</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">thread_concurrency = 32 </span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">isolation level and default engine </span></span><br><span class="line">default-storage-engine = INNODB</span><br><span class="line">transaction-isolation = READ-COMMITTED</span><br><span class="line"></span><br><span class="line">server-id  = 1739</span><br><span class="line">basedir     = /usr/local/mysql</span><br><span class="line">datadir     = /usr/local/mysql/data</span><br><span class="line">pid-file     = /usr/local/mysql/data/hostname.pid</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">open performance schema</span></span><br><span class="line">log-warnings</span><br><span class="line">sysdate-is-now</span><br><span class="line"></span><br><span class="line">binlog_format = ROW</span><br><span class="line">log_bin_trust_function_creators=1</span><br><span class="line">log-error  = /usr/local/mysql/data/hostname.err</span><br><span class="line">log-bin = /usr/local/mysql/arch/mysql-bin</span><br><span class="line">expire_logs_days = 7</span><br><span class="line"></span><br><span class="line">innodb_write_io_threads=16</span><br><span class="line"></span><br><span class="line">relay-log  = /usr/local/mysql/relay_log/relay-log</span><br><span class="line">relay-log-index = /usr/local/mysql/relay_log/relay-log.index</span><br><span class="line">relay_log_info_file= /usr/local/mysql/relay_log/relay-log.info</span><br><span class="line"></span><br><span class="line">log_slave_updates=1</span><br><span class="line">gtid_mode=OFF</span><br><span class="line">enforce_gtid_consistency=OFF</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> slave</span></span><br><span class="line">slave-parallel-type=LOGICAL_CLOCK</span><br><span class="line">slave-parallel-workers=4</span><br><span class="line">master_info_repository=TABLE</span><br><span class="line">relay_log_info_repository=TABLE</span><br><span class="line">relay_log_recovery=ON</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">other logs</span></span><br><span class="line"><span class="meta">#</span><span class="bash">general_log =1</span></span><br><span class="line"><span class="meta">#</span><span class="bash">general_log_file  = /usr/<span class="built_in">local</span>/mysql/data/general_log.err</span></span><br><span class="line"><span class="meta">#</span><span class="bash">slow_query_log=1</span></span><br><span class="line"><span class="meta">#</span><span class="bash">slow_query_log_file=/usr/<span class="built_in">local</span>/mysql/data/slow_log.err</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="keyword">for</span> replication slave</span></span><br><span class="line">sync_binlog = 500</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="keyword">for</span> innodb options </span></span><br><span class="line">innodb_data_home_dir = /usr/local/mysql/data/</span><br><span class="line">innodb_data_file_path = ibdata1:1G;ibdata2:1G:autoextend</span><br><span class="line"></span><br><span class="line">innodb_log_group_home_dir = /usr/local/mysql/arch</span><br><span class="line">innodb_log_files_in_group = 4</span><br><span class="line">innodb_log_file_size = 1G</span><br><span class="line">innodb_log_buffer_size = 200M</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">根据生产需要，调整pool size </span></span><br><span class="line">innodb_buffer_pool_size = 2G</span><br><span class="line"><span class="meta">#</span><span class="bash">innodb_additional_mem_pool_size = 50M <span class="comment">#deprecated in 5.6</span></span></span><br><span class="line">tmpdir = /usr/local/mysql/tmp</span><br><span class="line"></span><br><span class="line">innodb_lock_wait_timeout = 1000</span><br><span class="line"><span class="meta">#</span><span class="bash">innodb_thread_concurrency = 0</span></span><br><span class="line">innodb_flush_log_at_trx_commit = 2</span><br><span class="line"></span><br><span class="line">innodb_locks_unsafe_for_binlog=1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">innodb io features: add <span class="keyword">for</span> mysql5.5.8</span></span><br><span class="line">performance_schema</span><br><span class="line">innodb_read_io_threads=4</span><br><span class="line">innodb-write-io-threads=4</span><br><span class="line">innodb-io-capacity=200</span><br><span class="line"><span class="meta">#</span><span class="bash">purge threads change default(0) to 1 <span class="keyword">for</span> purge</span></span><br><span class="line">innodb_purge_threads=1</span><br><span class="line">innodb_use_native_aio=on</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="keyword">case</span>-sensitive file names and separate tablespace</span></span><br><span class="line">innodb_file_per_table = 1</span><br><span class="line">lower_case_table_names=1</span><br><span class="line"></span><br><span class="line">[mysqldump]</span><br><span class="line">quick</span><br><span class="line">max_allowed_packet = 128M</span><br><span class="line"></span><br><span class="line">[mysql]</span><br><span class="line">no-auto-rehash</span><br><span class="line">default-character-set=utf8mb4</span><br><span class="line"></span><br><span class="line">[mysqlhotcopy]</span><br><span class="line">interactive-timeout</span><br><span class="line"></span><br><span class="line">[myisamchk]</span><br><span class="line">key_buffer_size = 256M</span><br><span class="line">sort_buffer_size = 256M</span><br><span class="line">read_buffer = 2M</span><br><span class="line">write_buffer = 2M</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<h3 id="3-创建用户及用户组"><a href="#3-创建用户及用户组" class="headerlink" title="3.创建用户及用户组"></a>3.创建用户及用户组</h3><p>mysql  –&gt; mysql用户管理</p>
+<p>oracle  —&gt; oracle用户管理</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">创建用户组</span></span><br><span class="line">[root@localhost mysql]# groupadd -g 101 dba</span><br><span class="line"><span class="meta">#</span><span class="bash">创建用户</span></span><br><span class="line">[root@localhost mysql]# useradd -u 514 -g dba -G root -d /usr/local/mysql mysqladmin</span><br><span class="line">[root@localhost mysql]# id mysqladmin</span><br><span class="line">uid=514(mysqladmin) gid=101(dba) 组=101(dba),0(root)</span><br><span class="line">[root@localhost mysql]#</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">一般不需要设置mysqladmin的密码 直接从root用户或者sudo切换</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">copy环境变量配置文件到mysqladmin用户的家目录 防止样式丢失</span></span><br><span class="line">[root@localhost mysql]# cp /etc/skel/.* /usr/local/mysql</span><br><span class="line">cp: 略过目录"/etc/skel/."</span><br><span class="line">cp: 略过目录"/etc/skel/.."</span><br><span class="line">[root@localhost mysql]# </span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">配置环境变量</span></span><br><span class="line">[root@localhost mysql]# vi .bashrc</span><br><span class="line"></span><br><span class="line">export MYSQL_BASE=/usr/local/mysql</span><br><span class="line">export PATH=$&#123;MYSQL_BASE&#125;/bin:$PATH</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">unset USERNAME</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">stty erase ^H</span></span><br><span class="line">set umask to 022</span><br><span class="line">umask 022</span><br><span class="line">PS1=`uname -n`":"'$USER'":"'$PWD'":&gt;"; export PS1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">切换用户</span></span><br><span class="line">[root@localhost ~]# su - mysqladmin</span><br><span class="line">上一次登录：五 5月  1 15:06:51 CST 2020pts/0 上</span><br><span class="line">localhost.localdomain:mysqladmin:/usr/local/mysql:&gt;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">赋权限和用户组，切换mysqladmin用户，安装</span></span><br><span class="line">[root@localhost local]# chown  mysqladmin:dba /etc/my.cnf </span><br><span class="line">[root@localhost local]# chmod  640 /etc/my.cnf  </span><br><span class="line">[root@localhost local]# chown -R mysqladmin:dba /usr/local/mysql</span><br><span class="line">[root@localhost local]# chmod -R 755 /usr/local/mysql </span><br><span class="line">[root@localhost local]# </span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">配置服务及开机自启动</span></span><br><span class="line">[root@localhost local]# cd /usr/local/mysql</span><br><span class="line"><span class="meta">	#</span><span class="bash">将服务文件拷贝到init.d下，并重命名为mysql</span></span><br><span class="line">[root@localhost mysql]# cp support-files/mysql.server /etc/rc.d/init.d/mysql</span><br><span class="line">[root@localhost mysql]#</span><br><span class="line"><span class="meta">	#</span><span class="bash">赋予可执行权限</span></span><br><span class="line">[root@localhost mysql]# chmod +x /etc/rc.d/init.d/mysql</span><br><span class="line"><span class="meta">	#</span><span class="bash">删除服务</span></span><br><span class="line">[root@localhost mysql]# chkconfig --del mysql	</span><br><span class="line"><span class="meta">	#</span><span class="bash">添加服务</span></span><br><span class="line">[root@localhost mysql]#  chkconfig --add mysql</span><br><span class="line">[root@localhost mysql]# chkconfig --level 345 mysql on</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">安装libaio及安装mysql的初始db</span></span><br><span class="line">[root@localhost mysql]# yum -y install libaio</span><br><span class="line">[root@localhost mysql]# sudo su - mysqladmin</span><br><span class="line">上一次登录：五 5月  1 15:07:44 CST 2020pts/0 上</span><br><span class="line">localhost.localdomain:mysqladmin:/usr/local/mysql:&gt;</span><br><span class="line"></span><br><span class="line">localhost.localdomain:mysqladmin:/usr/local/mysql:&gt;bin/mysqld \</span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> --defaults-file=/etc/my.cnf \</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> --user=mysqladmin \</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> --basedir=/usr/<span class="built_in">local</span>/mysql/ \</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> --datadir=/usr/<span class="built_in">local</span>/mysql/data/ \</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> --initialize</span></span><br><span class="line"><span class="meta">#</span><span class="bash">查看临时密码</span></span><br><span class="line">localhost.localdomain:mysqladmin:/usr/local/mysql/data:&gt;cat hostname.err | grep password</span><br><span class="line">2020-05-01T07:17:11.213380Z 1 [Note] A temporary password is generated for root@localhost: =4PO-_AhhCzU</span><br><span class="line">localhost.localdomain:mysqladmin:/usr/local/mysql/data:&gt;</span><br><span class="line"><span class="meta">#</span><span class="bash">启动</span></span><br><span class="line">localhost.localdomain:mysqladmin:/usr/local/mysql/data:&gt;/usr/local/mysql/bin/mysqld_safe --defaults-file=/etc/my.cnf &amp;</span><br><span class="line">[1] 39294</span><br><span class="line">localhost.localdomain:mysqladmin:/usr/local/mysql/data:&gt;2020-05-01T07:19:04.015389Z mysqld_safe Logging to '/usr/local/mysql/data/hostname.err'.</span><br><span class="line">2020-05-01T07:19:04.040297Z mysqld_safe Starting mysqld daemon with databases from /usr/local/mysql/data</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">登录 &amp; 修改密码</span></span><br><span class="line">localhost.localdomain:mysqladmin:/usr/local/mysql/data:&gt;mysql -uroot -p=4PO-_AhhCzU </span><br><span class="line">mysql: [Warning] Using a password on the command line interface can be insecure.</span><br><span class="line">Welcome to the MySQL monitor.  Commands end with ; or \g.</span><br><span class="line">Your MySQL connection id is 3</span><br><span class="line">Server version: 5.7.11-log</span><br><span class="line"></span><br><span class="line">Copyright (c) 2000, 2016, Oracle and/or its affiliates. All rights reserved.</span><br><span class="line"></span><br><span class="line">Oracle is a registered trademark of Oracle Corporation and/or its</span><br><span class="line">affiliates. Other names may be trademarks of their respective</span><br><span class="line">owners.</span><br><span class="line"></span><br><span class="line">Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> </span></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> <span class="built_in">set</span> password =password(<span class="string">"123456"</span>);</span></span><br><span class="line">Query OK, 0 rows affected, 1 warning (0.00 sec)</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> flush privileges;</span></span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"><span class="built_in">exit</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">重启</span></span><br><span class="line">localhost.localdomain:mysqladmin:/usr/local/mysql/data:&gt;service mysql restart</span><br><span class="line">Shutting down MySQL..2020-05-01T07:23:48.645194Z mysqld_safe mysqld from pid file /usr/local/mysql/data/hostname.pid ended</span><br><span class="line"> SUCCESS! </span><br><span class="line">Starting MySQL. SUCCESS! </span><br><span class="line">[1]+  完成                  /usr/local/mysql/bin/mysqld_safe --defaults-file=/etc/my.cnf</span><br><span class="line">localhost.localdomain:mysqladmin:/usr/local/mysql/data:&gt;</span><br><span class="line"></span><br><span class="line">localhost.localdomain:mysqladmin:/usr/local/mysql/data:&gt;mysql -uroot -p123456</span><br><span class="line">mysql: [Warning] Using a password on the command line interface can be insecure.</span><br><span class="line">Welcome to the MySQL monitor.  Commands end with ; or \g.</span><br><span class="line">Your MySQL connection id is 2</span><br><span class="line">Server version: 5.7.11-log MySQL Community Server (GPL)</span><br><span class="line"></span><br><span class="line">Copyright (c) 2000, 2016, Oracle and/or its affiliates. All rights reserved.</span><br><span class="line"></span><br><span class="line">Oracle is a registered trademark of Oracle Corporation and/or its</span><br><span class="line">affiliates. Other names may be trademarks of their respective</span><br><span class="line">owners.</span><br><span class="line"></span><br><span class="line">Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> </span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">修改登录权限</span></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> select User,Host from user;</span></span><br><span class="line">+-----------+-----------+</span><br><span class="line">| User      | Host      |</span><br><span class="line">+-----------+-----------+</span><br><span class="line">| mysql.sys | localhost |</span><br><span class="line">| root      | localhost |</span><br><span class="line">+-----------+-----------+</span><br><span class="line">2 rows in set (0.00 sec)</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> update user <span class="built_in">set</span> Host=<span class="string">"%"</span> <span class="built_in">where</span> User=<span class="string">"root"</span>;</span></span><br><span class="line">Query OK, 1 row affected (0.00 sec)</span><br><span class="line">Rows matched: 1  Changed: 1  Warnings: 0</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> flush privileges;</span></span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> % 代表任意客户端机器都可以访问mysql服务器</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 192.168.1.1 代表这台机器有权限访问</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 192.168.1.% 代表这个网段的所有ip都有权限访问</span></span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<h2 id="二、常用操作"><a href="#二、常用操作" class="headerlink" title="二、常用操作"></a>二、常用操作</h2><h3 id="查看进程"><a href="#查看进程" class="headerlink" title="查看进程"></a>查看进程</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; show processlist;</span><br><span class="line">+<span class="comment">----+------+--------------------+-------+---------+------+----------+------------------+</span></span><br><span class="line">| Id | User | Host               | db    | Command | Time | State    | Info             |</span><br><span class="line">+<span class="comment">----+------+--------------------+-------+---------+------+----------+------------------+</span></span><br><span class="line">|  2 | root | localhost          | mysql | Query   |    0 | starting | <span class="keyword">show</span> <span class="keyword">processlist</span> |</span><br><span class="line">|  <span class="number">5</span> | root | <span class="number">192.168</span><span class="number">.18</span><span class="number">.1</span>:<span class="number">59227</span> | <span class="literal">NULL</span>  | <span class="keyword">Sleep</span>   |  <span class="number">113</span> |          | <span class="literal">NULL</span>             |</span><br><span class="line">|  <span class="number">6</span> | root | <span class="number">192.168</span><span class="number">.18</span><span class="number">.1</span>:<span class="number">59228</span> | <span class="literal">NULL</span>  | <span class="keyword">Sleep</span>   |  <span class="number">113</span> |          | <span class="literal">NULL</span>             |</span><br><span class="line">|  <span class="number">7</span> | root | <span class="number">192.168</span><span class="number">.18</span><span class="number">.1</span>:<span class="number">59230</span> | <span class="literal">NULL</span>  | <span class="keyword">Sleep</span>   |  <span class="number">107</span> |          | <span class="literal">NULL</span>             |</span><br><span class="line">+<span class="comment">----+------+--------------------+-------+---------+------+----------+------------------+</span></span><br><span class="line"><span class="number">4</span> <span class="keyword">rows</span> <span class="keyword">in</span> <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br><span class="line"><span class="comment">--杀死进程</span></span><br><span class="line"><span class="keyword">kill</span> <span class="keyword">id</span></span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+<h2 id="三、字段类型"><a href="#三、字段类型" class="headerlink" title="三、字段类型"></a>三、字段类型</h2><table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>字节长度</th>
+<th>范围或用法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Bit</td>
+<td>1</td>
+<td>无符号[0,255]，有符号[-128,127]，天缘博客备注：BIT和BOOL布尔型都占用1字节</td>
+</tr>
+<tr>
+<td>TinyInt</td>
+<td>1</td>
+<td>整数[0,255]</td>
+</tr>
+<tr>
+<td>SmallInt</td>
+<td>2</td>
+<td>无符号[0,65535]，有符号[-32768,32767]</td>
+</tr>
+<tr>
+<td>MediumInt</td>
+<td>3</td>
+<td>无符号[0,2^24-1]，有符号[-2^23,2^23-1]]</td>
+</tr>
+<tr>
+<td>Int</td>
+<td>4</td>
+<td>无符号[0,2^32-1]，有符号[-2^31,2^31-1]</td>
+</tr>
+<tr>
+<td>BigInt</td>
+<td>8</td>
+<td>无符号[0,2^64-1]，有符号[-2^63 ,2^63 -1]</td>
+</tr>
+<tr>
+<td>Float(M,D)</td>
+<td>4</td>
+<td>单精度浮点数。天缘博客提醒这里的D是精度，如果D&lt;=24则为默认的FLOAT，如果D&gt;24则会自动被转换为DOUBLE型。</td>
+</tr>
+<tr>
+<td>Double(M,D)</td>
+<td>8</td>
+<td>双精度浮点。</td>
+</tr>
+<tr>
+<td>Decimal(M,D)</td>
+<td>M+1或M+2</td>
+<td>未打包的浮点数，用法类似于FLOAT和DOUBLE，天缘博客提醒您如果在ASP中使用到Decimal数据类型，直接从数据库读出来的Decimal可能需要先转换成Float或Double类型后再进行运算。</td>
+</tr>
+<tr>
+<td>Date</td>
+<td>3</td>
+<td>以YYYY-MM-DD的格式显示，比如：2009-07-19</td>
+</tr>
+<tr>
+<td>Date Time</td>
+<td>8</td>
+<td>以YYYY-MM-DD HH:MM:SS的格式显示，比如：2009-07-19 11：22：30</td>
+</tr>
+<tr>
+<td>TimeStamp</td>
+<td>4</td>
+<td>以YYYY-MM-DD的格式显示，比如：2009-07-19</td>
+</tr>
+<tr>
+<td>Time</td>
+<td>3</td>
+<td>以HH:MM:SS的格式显示。比如：11：22：30</td>
+</tr>
+<tr>
+<td>Year</td>
+<td>1</td>
+<td>以YYYY的格式显示。比如：2009</td>
+</tr>
+<tr>
+<td>Char(M)</td>
+<td>M</td>
+<td>定长字符串。</td>
+</tr>
+<tr>
+<td>VarChar(M)</td>
+<td>M</td>
+<td>变长字符串，要求M&lt;=255</td>
+</tr>
+<tr>
+<td>Binary(M)</td>
+<td>M</td>
+<td>类似Char的二进制存储，特点是插入定长不足补0</td>
+</tr>
+<tr>
+<td>VarBinary(M)</td>
+<td>M</td>
+<td>类似VarChar的变长二进制存储，特点是定长不补0</td>
+</tr>
+<tr>
+<td>Tiny Text</td>
+<td>Max:255</td>
+<td>大小写不敏感</td>
+</tr>
+<tr>
+<td>Text</td>
+<td>Max:64K</td>
+<td>大小写不敏感</td>
+</tr>
+<tr>
+<td>Medium Text</td>
+<td>Max:16M</td>
+<td>大小写不敏感</td>
+</tr>
+<tr>
+<td>Long Text</td>
+<td>Max:4G</td>
+<td>大小写不敏感</td>
+</tr>
+<tr>
+<td>TinyBlob</td>
+<td>Max:255</td>
+<td>大小写敏感</td>
+</tr>
+<tr>
+<td>Blob</td>
+<td>Max:64K</td>
+<td>大小写敏感</td>
+</tr>
+<tr>
+<td>MediumBlob</td>
+<td>Max:16M</td>
+<td>大小写敏感</td>
+</tr>
+<tr>
+<td>LongBlob</td>
+<td>Max:4G</td>
+<td>大小写敏感</td>
+</tr>
+<tr>
+<td>Enum</td>
+<td>1或2</td>
+<td>最大可达65535个不同的枚举值</td>
+</tr>
+<tr>
+<td>Set</td>
+<td>可达8</td>
+<td>最大可达64个不同的值</td>
+</tr>
+<tr>
+<td>Geometry</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Point</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LineString</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Polygon</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>MultiPoint</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>MultiLineString</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>MultiPolygon</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>GeometryCollection</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>timestamp 和datetime的区别：<a href="https://segmentfault.com/a/1190000017393602?utm_source=tag-newest" target="_blank" rel="noopener">https://segmentfault.com/a/1190000017393602?utm_source=tag-newest</a></p>
+<h2 id="四、sql"><a href="#四、sql" class="headerlink" title="四、sql"></a>四、sql</h2><h3 id="sql类型"><a href="#sql类型" class="headerlink" title="sql类型"></a>sql类型</h3><ul>
+<li>ddl：数据定义语言 ,create drop …</li>
+<li>dml: 数据操作语言 ,select insert update delete …</li>
+<li>dcl : 数据控制语言，grant..</li>
+</ul>
+<h3 id="建表规范"><a href="#建表规范" class="headerlink" title="建表规范"></a>建表规范</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t_a(</span><br><span class="line"><span class="comment">--第一列必须是id自增长</span></span><br><span class="line"><span class="keyword">id</span> <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">not</span> <span class="literal">null</span> auto_increment primary <span class="keyword">key</span> ,</span><br><span class="line"></span><br><span class="line"><span class="keyword">name</span> <span class="built_in">varchar</span>(<span class="number">255</span>),</span><br><span class="line">age <span class="built_in">int</span>(<span class="number">3</span>),</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">create_user <span class="built_in">varchar</span>(<span class="number">255</span>),</span><br><span class="line">create_time <span class="built_in">timestamp</span> <span class="keyword">not</span> <span class="literal">null</span> <span class="keyword">default</span> <span class="keyword">current_timestamp</span>,</span><br><span class="line">update_user <span class="built_in">varchar</span>(<span class="number">255</span>),</span><br><span class="line">update_time <span class="built_in">timestamp</span> <span class="keyword">not</span> <span class="literal">null</span> <span class="keyword">default</span> <span class="keyword">current_timestamp</span> <span class="keyword">on</span> <span class="keyword">update</span> <span class="keyword">current_timestamp</span></span><br><span class="line">) <span class="keyword">default</span> <span class="keyword">CHARSET</span>=utf8;</span><br></pre></td></tr></table></figure>
+
+<h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">user</span>(</span><br><span class="line"><span class="keyword">id</span> <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">not</span> <span class="literal">null</span> primary <span class="keyword">key</span> auto_increment <span class="keyword">comment</span> <span class="string">"无意义主键"</span>,</span><br><span class="line"></span><br><span class="line"><span class="keyword">name</span> <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">comment</span> <span class="string">"姓名"</span> ,</span><br><span class="line">age  <span class="built_in">int</span>(<span class="number">3</span>) <span class="keyword">comment</span> <span class="string">"年龄"</span>,</span><br><span class="line">sex <span class="built_in">int</span>(<span class="number">1</span>)  <span class="keyword">comment</span> <span class="string">"性别  0代表男  1代表女"</span></span><br><span class="line">)<span class="keyword">default</span> <span class="keyword">charset</span>=utf8 <span class="keyword">comment</span> <span class="string">"用户信息表"</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="union-amp-amp-union-all"><a href="#union-amp-amp-union-all" class="headerlink" title="union &amp;&amp; union all"></a>union &amp;&amp; union all</h3><blockquote>
+<p>union会去重，union all不会去重</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--创建a表</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> a(</span><br><span class="line"><span class="keyword">id</span> <span class="built_in">int</span>(<span class="number">11</span>) ,</span><br><span class="line"><span class="keyword">name</span> <span class="built_in">varchar</span>(<span class="number">255</span>)</span><br><span class="line">)<span class="keyword">default</span> <span class="keyword">charset</span>=utf8;</span><br><span class="line"><span class="comment">--创建c表</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> c(</span><br><span class="line"><span class="keyword">id</span> <span class="built_in">int</span>(<span class="number">11</span>) ,</span><br><span class="line"><span class="keyword">name</span> <span class="built_in">varchar</span>(<span class="number">255</span>)</span><br><span class="line">)<span class="keyword">default</span> <span class="keyword">charset</span>=utf8;</span><br><span class="line"></span><br><span class="line"><span class="comment">--使用union all</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> a</span><br><span class="line"><span class="keyword">union</span> <span class="keyword">all</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> c;</span><br><span class="line"><span class="comment">--result</span></span><br><span class="line">1	张三</span><br><span class="line">2	李四</span><br><span class="line">1	张三</span><br><span class="line">2	李四</span><br><span class="line">3	王五</span><br><span class="line"></span><br><span class="line"><span class="comment">--使用union</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> a</span><br><span class="line"><span class="keyword">union</span> </span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> c;</span><br><span class="line"><span class="comment">--result</span></span><br><span class="line">1	张三</span><br><span class="line">2	李四</span><br><span class="line">3	王五</span><br></pre></td></tr></table></figure>
+
+<h3 id="ifnull"><a href="#ifnull" class="headerlink" title="ifnull"></a>ifnull</h3><p>mysql中使用ifnull来判断，而hive中使用nvl来判断</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--创建表</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> b(</span><br><span class="line"><span class="keyword">id</span> <span class="built_in">int</span>(<span class="number">11</span>) ,</span><br><span class="line"><span class="keyword">name</span> <span class="built_in">varchar</span>(<span class="number">255</span>),</span><br><span class="line">age <span class="built_in">int</span>(<span class="number">3</span>)</span><br><span class="line">);</span><br><span class="line"><span class="comment">-- 插入数据</span></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> b <span class="keyword">values</span>(<span class="number">1</span>,<span class="string">"张三"</span>,<span class="number">52</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> b <span class="keyword">values</span>(<span class="number">2</span>,<span class="string">"李四"</span>,<span class="number">45</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> b <span class="keyword">values</span>(<span class="number">3</span>,<span class="string">"王五"</span>,<span class="number">33</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> b(<span class="keyword">id</span>,<span class="keyword">name</span> ) <span class="keyword">values</span>(<span class="number">4</span>,<span class="string">"赵柳"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> b;</span><br><span class="line">1	张三	52</span><br><span class="line">2	李四	45</span><br><span class="line">3	王五	33</span><br><span class="line">4	赵柳	null</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">id</span> ,<span class="keyword">name</span> ,<span class="keyword">ifnull</span>(age,<span class="number">0</span>) <span class="keyword">from</span> b;</span><br><span class="line">1	张三	52</span><br><span class="line">2	李四	45</span><br><span class="line">3	王五	33</span><br><span class="line">4	赵柳	0</span><br></pre></td></tr></table></figure>
+
+<h2 id="五、join"><a href="#五、join" class="headerlink" title="五、join"></a>五、join</h2> <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 创建表</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> t_blog(</span><br><span class="line">        <span class="keyword">id</span> <span class="built_in">INT</span> PRIMARY <span class="keyword">KEY</span> AUTO_INCREMENT,</span><br><span class="line">        title <span class="built_in">VARCHAR</span>(<span class="number">50</span>),</span><br><span class="line">        typeId <span class="built_in">INT</span></span><br><span class="line">    );</span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> t_blog;</span><br><span class="line">    +<span class="comment">----+-------+--------+</span></span><br><span class="line">    | id | title | typeId |</span><br><span class="line">    +<span class="comment">----+-------+--------+</span></span><br><span class="line">    |  1 | aaa   |      1 |</span><br><span class="line">    |  2 | bbb   |      2 |</span><br><span class="line">    |  3 | ccc   |      3 |</span><br><span class="line">    |  4 | ddd   |      4 |</span><br><span class="line">    |  5 | eee   |      4 |</span><br><span class="line">    |  6 | fff   |      3 |</span><br><span class="line">    |  7 | ggg   |      2 |</span><br><span class="line">    |  8 | hhh   |   NULL |</span><br><span class="line">    |  9 | iii   |   NULL |</span><br><span class="line">    | 10 | jjj   |   NULL |</span><br><span class="line">    +<span class="comment">----+-------+--------+</span></span><br><span class="line">    <span class="comment">-- 博客的类别</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> t_type(</span><br><span class="line">        <span class="keyword">id</span> <span class="built_in">INT</span> PRIMARY <span class="keyword">KEY</span> AUTO_INCREMENT,</span><br><span class="line">        <span class="keyword">name</span> <span class="built_in">VARCHAR</span>(<span class="number">20</span>)</span><br><span class="line">    );</span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> t_type;</span><br><span class="line">    +<span class="comment">----+------------+</span></span><br><span class="line">    | id | name       |</span><br><span class="line">    +<span class="comment">----+------------+</span></span><br><span class="line">    |  1 | C++        |</span><br><span class="line">    |  2 | C          |</span><br><span class="line">    |  3 | Java       |</span><br><span class="line">    |  4 | C<span class="comment">#         |</span></span><br><span class="line">    |  5 | python     |</span><br><span class="line">    +<span class="comment">----+------------+</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="笛卡尔积-cross-join"><a href="#笛卡尔积-cross-join" class="headerlink" title="笛卡尔积 cross join"></a>笛卡尔积 cross join</h3><blockquote>
+<p>笛卡尔积：将a表的每一条记录都与b表的每一条数据进行关联，假如a表十条数据，b表五条数据 ，结果就是五十条数据。</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--笛卡尔积join</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> t_blog <span class="keyword">join</span> t_type ;</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> t_blog  <span class="keyword">cross</span> <span class="keyword">join</span> t_type ;</span><br><span class="line">+<span class="comment">----+-------+--------+----+--------+</span></span><br><span class="line">| id | title | typeId | id | name   |</span><br><span class="line">+<span class="comment">----+-------+--------+----+--------+</span></span><br><span class="line">|  1 | aaa   |      1 |  1 | c++    |</span><br><span class="line">|  1 | aaa   |      1 |  2 | c      |</span><br><span class="line">|  1 | aaa   |      1 |  3 | java   |</span><br><span class="line">|  1 | aaa   |      1 |  4 | c<span class="comment">#     |</span></span><br><span class="line">|  1 | aaa   |      1 |  5 | python |</span><br><span class="line">|  2 | bbb   |      2 |  1 | c++    |</span><br><span class="line">|  2 | bbb   |      2 |  2 | c      |</span><br><span class="line">|  2 | bbb   |      2 |  3 | java   |</span><br><span class="line">|  2 | bbb   |      2 |  4 | c<span class="comment">#     |</span></span><br><span class="line">|  2 | bbb   |      2 |  5 | python |</span><br><span class="line">|  3 | ccc   |      3 |  1 | c++    |</span><br><span class="line">|  3 | ccc   |      3 |  2 | c      |</span><br><span class="line">|  3 | ccc   |      3 |  3 | java   |</span><br><span class="line">|  3 | ccc   |      3 |  4 | c<span class="comment">#     |</span></span><br><span class="line">|  3 | ccc   |      3 |  5 | python |</span><br><span class="line">|  4 | ddd   |      4 |  1 | c++    |</span><br><span class="line">|  4 | ddd   |      4 |  2 | c      |</span><br><span class="line">|  4 | ddd   |      4 |  3 | java   |</span><br><span class="line">|  4 | ddd   |      4 |  4 | c<span class="comment">#     |</span></span><br><span class="line">|  4 | ddd   |      4 |  5 | python |</span><br><span class="line">|  5 | eee   |      4 |  1 | c++    |</span><br><span class="line">|  5 | eee   |      4 |  2 | c      |</span><br><span class="line">|  5 | eee   |      4 |  3 | java   |</span><br><span class="line">|  5 | eee   |      4 |  4 | c<span class="comment">#     |</span></span><br><span class="line">|  5 | eee   |      4 |  5 | python |</span><br><span class="line">|  6 | fff   |      3 |  1 | c++    |</span><br><span class="line">|  6 | fff   |      3 |  2 | c      |</span><br><span class="line">|  6 | fff   |      3 |  3 | java   |</span><br><span class="line">|  6 | fff   |      3 |  4 | c<span class="comment">#     |</span></span><br><span class="line">|  6 | fff   |      3 |  5 | python |</span><br><span class="line">|  7 | ggg   |      2 |  1 | c++    |</span><br><span class="line">|  7 | ggg   |      2 |  2 | c      |</span><br><span class="line">|  7 | ggg   |      2 |  3 | java   |</span><br><span class="line">|  7 | ggg   |      2 |  4 | c<span class="comment">#     |</span></span><br><span class="line">|  7 | ggg   |      2 |  5 | python |</span><br><span class="line">|  8 | hhh   |   NULL |  1 | c++    |</span><br><span class="line">|  8 | hhh   |   NULL |  2 | c      |</span><br><span class="line">|  8 | hhh   |   NULL |  3 | java   |</span><br><span class="line">|  8 | hhh   |   NULL |  4 | c<span class="comment">#     |</span></span><br><span class="line">|  8 | hhh   |   NULL |  5 | python |</span><br><span class="line">|  9 | iii   |   NULL |  1 | c++    |</span><br><span class="line">|  9 | iii   |   NULL |  2 | c      |</span><br><span class="line">|  9 | iii   |   NULL |  3 | java   |</span><br><span class="line">|  9 | iii   |   NULL |  4 | c<span class="comment">#     |</span></span><br><span class="line">|  9 | iii   |   NULL |  5 | python |</span><br><span class="line">| 10 | jjj   |   NULL |  1 | c++    |</span><br><span class="line">| 10 | jjj   |   NULL |  2 | c      |</span><br><span class="line">| 10 | jjj   |   NULL |  3 | java   |</span><br><span class="line">| 10 | jjj   |   NULL |  4 | c<span class="comment">#     |</span></span><br><span class="line">| 10 | jjj   |   NULL |  5 | python |</span><br><span class="line">+<span class="comment">----+-------+--------+----+--------+</span></span><br><span class="line">50 rows in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure>
+
+<h3 id="内连接-inner-join"><a href="#内连接-inner-join" class="headerlink" title="内连接 inner join"></a>内连接 inner join</h3><blockquote>
+<p>内连接：求两个表的交集，从笛卡尔积的角度讲就是从笛卡尔积中挑选on子句中条件成立的记录，如果没有on条件，那么就等同于笛卡尔积</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from t_blog inner join t_type on t_blog.typeId = t_type.id ; </span><br><span class="line">+<span class="comment">----+-------+--------+----+------+</span></span><br><span class="line">| id | title | typeId | id | name |</span><br><span class="line">+<span class="comment">----+-------+--------+----+------+</span></span><br><span class="line">|  1 | aaa   |      1 |  1 | c++  |</span><br><span class="line">|  2 | bbb   |      2 |  2 | c    |</span><br><span class="line">|  3 | ccc   |      3 |  3 | java |</span><br><span class="line">|  4 | ddd   |      4 |  4 | c<span class="comment">#   |</span></span><br><span class="line">|  5 | eee   |      4 |  4 | c<span class="comment">#   |</span></span><br><span class="line">|  6 | fff   |      3 |  3 | java |</span><br><span class="line">|  7 | ggg   |      2 |  2 | c    |</span><br><span class="line">+<span class="comment">----+-------+--------+----+------+</span></span><br><span class="line">7 rows in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure>
+
+<h3 id="左连接-left-join"><a href="#左连接-left-join" class="headerlink" title="左连接 left  join"></a>左连接 left  join</h3><blockquote>
+<p>左连接：左表的数据要全部出现在结果中</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from t_blog left join t_type on t_blog.typeId = t_type.id ;      </span><br><span class="line">+<span class="comment">----+-------+--------+------+------+</span></span><br><span class="line">| id | title | typeId | id   | name |</span><br><span class="line">+<span class="comment">----+-------+--------+------+------+</span></span><br><span class="line">|  1 | aaa   |      1 |    1 | c++  |</span><br><span class="line">|  2 | bbb   |      2 |    2 | c    |</span><br><span class="line">|  7 | ggg   |      2 |    2 | c    |</span><br><span class="line">|  3 | ccc   |      3 |    3 | java |</span><br><span class="line">|  6 | fff   |      3 |    3 | java |</span><br><span class="line">|  4 | ddd   |      4 |    4 | c<span class="comment">#   |</span></span><br><span class="line">|  5 | eee   |      4 |    4 | c<span class="comment">#   |</span></span><br><span class="line">|  8 | hhh   |   NULL | NULL | NULL |</span><br><span class="line">|  9 | iii   |   NULL | NULL | NULL |</span><br><span class="line">| 10 | jjj   |   NULL | NULL | NULL |</span><br><span class="line">+<span class="comment">----+-------+--------+------+------+</span></span><br><span class="line">10 rows in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure>
+
+<h3 id="右连接-right-join"><a href="#右连接-right-join" class="headerlink" title="右连接 right join"></a>右连接 right join</h3><blockquote>
+<p>右连接：和左连接类似 ，不再赘述</p>
+</blockquote>
+<h3 id="外连接-outer-join"><a href="#外连接-outer-join" class="headerlink" title="外连接 outer join"></a>外连接 outer join</h3><blockquote>
+<p>外连接：求两个集合的并集，从笛卡尔积的角度来讲就是挑出on子句中成立的记录，然后加上左表中剩余的记录，最后加上右表中剩余的记录。但是mysql不支持outer join ，但是可以使用union操作实现</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from t_blog left join t_type on t_blog.typeId = t_type.id</span><br><span class="line">    -&gt; union </span><br><span class="line">    -&gt; select * from t_blog right join t_type on t_blog.typeId = t_type.id;   </span><br><span class="line">+<span class="comment">------+-------+--------+------+--------+</span></span><br><span class="line">| id   | title | typeId | id   | name   |</span><br><span class="line">+<span class="comment">------+-------+--------+------+--------+</span></span><br><span class="line">|    1 | aaa   |      1 |    1 | c++    |</span><br><span class="line">|    2 | bbb   |      2 |    2 | c      |</span><br><span class="line">|    7 | ggg   |      2 |    2 | c      |</span><br><span class="line">|    3 | ccc   |      3 |    3 | java   |</span><br><span class="line">|    6 | fff   |      3 |    3 | java   |</span><br><span class="line">|    4 | ddd   |      4 |    4 | c<span class="comment">#     |</span></span><br><span class="line">|    5 | eee   |      4 |    4 | c<span class="comment">#     |</span></span><br><span class="line">|    8 | hhh   |   NULL | NULL | NULL   |</span><br><span class="line">|    9 | iii   |   NULL | NULL | NULL   |</span><br><span class="line">|   10 | jjj   |   NULL | NULL | NULL   |</span><br><span class="line">| NULL | NULL  |   NULL |    5 | python |</span><br><span class="line">+<span class="comment">------+-------+--------+------+--------+</span></span><br><span class="line">11 rows in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure>
+
+<h3 id="自然连接-natural-join"><a href="#自然连接-natural-join" class="headerlink" title="自然连接 natural join"></a>自然连接 natural join</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from t_blog natural join t_type ;</span><br><span class="line">+<span class="comment">----+-------+--------+--------+</span></span><br><span class="line">| id | title | typeId | name   |</span><br><span class="line">+<span class="comment">----+-------+--------+--------+</span></span><br><span class="line">|  1 | aaa   |      1 | c++    |</span><br><span class="line">|  2 | bbb   |      2 | c      |</span><br><span class="line">|  3 | ccc   |      3 | java   |</span><br><span class="line">|  4 | ddd   |      4 | c<span class="comment">#     |</span></span><br><span class="line">|  5 | eee   |      4 | python |</span><br><span class="line">+<span class="comment">----+-------+--------+--------+</span></span><br><span class="line">5 rows in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure>
+
+<h2 id="六、topN"><a href="#六、topN" class="headerlink" title="六、topN"></a>六、topN</h2><blockquote>
+<p>hive中可以使用窗口函数快速进行topn的统计，但是mysql中没有，因此mysql统计topn相对麻烦</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--数据</span></span><br><span class="line">mysql&gt; select * from emp;</span><br><span class="line">+<span class="comment">-------+--------+-----------+------+---------------------+---------+---------+--------+</span></span><br><span class="line">| empno | ename  | job       | mgr  | hiredate            | sal     | comm    | deptno |</span><br><span class="line">+<span class="comment">-------+--------+-----------+------+---------------------+---------+---------+--------+</span></span><br><span class="line">|  7369 | SMITH  | CLERK     | 7902 | 1980-12-17 00:00:00 |  800.00 |    NULL |     20 |</span><br><span class="line">|  7499 | ALLEN  | SALESMAN  | 7698 | 1981-02-20 00:00:00 | 1600.00 |  300.00 |     30 |</span><br><span class="line">|  7521 | WARD   | SALESMAN  | 7698 | 1981-02-22 00:00:00 | 1250.00 |  500.00 |     30 |</span><br><span class="line">|  7566 | JONES  | MANAGER   | 7839 | 1981-04-02 00:00:00 | 2975.00 |    NULL |     20 |</span><br><span class="line">|  7654 | MARTIN | SALESMAN  | 7698 | 1981-09-28 00:00:00 | 1250.00 | 1400.00 |     30 |</span><br><span class="line">|  7698 | BLAKE  | MANAGER   | 7839 | 1981-05-01 00:00:00 | 2850.00 |    NULL |     30 |</span><br><span class="line">|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-09 00:00:00 | 2450.00 |    NULL |     10 |</span><br><span class="line">|  7788 | SCOTT  | ANALYST   | 7566 | 1982-12-09 00:00:00 | 3000.00 |    NULL |     20 |</span><br><span class="line">|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 00:00:00 | 5000.00 |    NULL |     10 |</span><br><span class="line">|  7844 | TURNER | SALESMAN  | 7698 | 1981-09-08 00:00:00 | 1500.00 |    0.00 |     30 |</span><br><span class="line">|  7876 | ADAMS  | CLERK     | 7788 | 1983-01-12 00:00:00 | 1100.00 |    NULL |     20 |</span><br><span class="line">|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 00:00:00 |  950.00 |    NULL |     30 |</span><br><span class="line">|  7902 | FORD   | ANALYST   | 7566 | 1981-12-03 00:00:00 | 3000.00 |    NULL |     20 |</span><br><span class="line">|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 00:00:00 | 1300.00 |    NULL |     10 |</span><br><span class="line">+<span class="comment">-------+--------+-----------+------+---------------------+---------+---------+--------+</span></span><br><span class="line"></span><br><span class="line"><span class="comment">--需求：统计每个部门里面薪资最高的前两位</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">--创建视图</span></span><br><span class="line">	<span class="keyword">create</span> <span class="keyword">view</span> sal </span><br><span class="line">		<span class="keyword">as</span></span><br><span class="line">	<span class="keyword">select</span>  </span><br><span class="line">	deptno ,job,</span><br><span class="line">	<span class="keyword">sum</span>(sal+<span class="keyword">ifnull</span>(comm ,<span class="number">0</span>)) sal</span><br><span class="line">	<span class="keyword">from</span> emp</span><br><span class="line">	<span class="keyword">group</span> <span class="keyword">by</span> deptno ,job ;</span><br><span class="line">	</span><br><span class="line">mysql&gt; select * from sal;</span><br><span class="line">+<span class="comment">--------+-----------+---------+</span></span><br><span class="line">| deptno | job       | sal     |</span><br><span class="line">+<span class="comment">--------+-----------+---------+</span></span><br><span class="line">|     10 | CLERK     | 1300.00 |</span><br><span class="line">|     10 | MANAGER   | 2450.00 |</span><br><span class="line">|     10 | PRESIDENT | 5000.00 |</span><br><span class="line">|     20 | ANALYST   | 6000.00 |</span><br><span class="line">|     20 | CLERK     | 1900.00 |</span><br><span class="line">|     20 | MANAGER   | 2975.00 |</span><br><span class="line">|     30 | CLERK     |  950.00 |</span><br><span class="line">|     30 | MANAGER   | 2850.00 |</span><br><span class="line">|     30 | SALESMAN  | 7800.00 |</span><br><span class="line">+<span class="comment">--------+-----------+---------+</span></span><br><span class="line">9 rows in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br><span class="line"><span class="comment">--最终查询结果</span></span><br><span class="line">mysql&gt; <span class="keyword">select</span> a.* <span class="keyword">from</span> sal a</span><br><span class="line">    -&gt; <span class="keyword">where</span> (</span><br><span class="line">    -&gt; <span class="keyword">select</span> <span class="keyword">count</span>(*) <span class="keyword">from</span> sal b <span class="keyword">where</span> a.deptno=b.deptno <span class="keyword">and</span> a.sal&lt;b.sal)&lt;<span class="number">2</span></span><br><span class="line">    -&gt;  <span class="keyword">order</span> <span class="keyword">by</span> a.deptno ,sal <span class="keyword">desc</span>;</span><br><span class="line">+<span class="comment">--------+-----------+---------+</span></span><br><span class="line">| deptno | job       | sal     |</span><br><span class="line">+<span class="comment">--------+-----------+---------+</span></span><br><span class="line">|     10 | PRESIDENT | 5000.00 |</span><br><span class="line">|     10 | MANAGER   | 2450.00 |</span><br><span class="line">|     20 | ANALYST   | 6000.00 |</span><br><span class="line">|     20 | MANAGER   | 2975.00 |</span><br><span class="line">|     30 | SALESMAN  | 7800.00 |</span><br><span class="line">|     30 | MANAGER   | 2850.00 |</span><br><span class="line">+<span class="comment">--------+-----------+---------+</span></span><br><span class="line">6 rows in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="七、MySQL的执行顺序"><a href="#七、MySQL的执行顺序" class="headerlink" title="七、MySQL的执行顺序"></a>七、MySQL的执行顺序</h2><h3 id="mysql执行sql的顺序从-From-开始，以下是执行的顺序流程"><a href="#mysql执行sql的顺序从-From-开始，以下是执行的顺序流程" class="headerlink" title="mysql执行sql的顺序从 From 开始，以下是执行的顺序流程"></a>mysql执行sql的顺序从 From 开始，以下是执行的顺序流程</h3><ol>
+<li><code>FROM</code>  table1 left join table2 on 将table1和table2中的数据产生笛卡尔积，生成Temp1</li>
+<li><code>JOIN</code>table2  所以先是确定表，再确定关联条件</li>
+<li><code>ON</code> table1.column = table2.columu 确定表的绑定条件 由Temp1产生中间表Temp2</li>
+<li><code>WHERE</code>  对中间表Temp2产生的结果进行过滤  产生中间表Temp3</li>
+<li><code>GROUP BY</code> 对中间表Temp3进行分组，产生中间表Temp4</li>
+<li><code>HAVING</code>  对分组后的记录进行聚合 产生中间表Temp5</li>
+<li><code>SELECT</code>  对中间表Temp5进行列筛选，产生中间表 Temp6</li>
+<li><code>DISTINCT</code> 对中间表 Temp6进行去重，产生中间表 Temp7</li>
+<li><code>ORDER BY</code> 对Temp7中的数据进行排序，产生中间表Temp8</li>
+<li><code>LIMIT</code> 对中间表Temp8进行分页，产生中间表Temp9</li>
+</ol>
+<h2 id="八、MySQL事务"><a href="#八、MySQL事务" class="headerlink" title="八、MySQL事务"></a>八、MySQL事务</h2><h3 id="什么是事务"><a href="#什么是事务" class="headerlink" title="什么是事务"></a>什么是事务</h3><blockquote>
+<p>事务是应用程序中一系列严密的操作，所有操作必须成功完成，否则在每个操作中所做的更改都会被撤销，也就是事务具有原子性，一个事务中的一系列操作要么全部成功，要么全失败</p>
+</blockquote>
+<h3 id="事务的目的"><a href="#事务的目的" class="headerlink" title="事务的目的"></a>事务的目的</h3><ul>
+<li>成功情况下，能将数据从一种状态变为另一种状态，并能够持久化</li>
+<li>异常情况下，能将数据恢复到正常状态，要能保证一致性，包含数据的一致性和约束的一致性</li>
+<li>并发情况下，并发的操作之间不能产生相互影响</li>
+</ul>
+<h3 id="事务的ACID"><a href="#事务的ACID" class="headerlink" title="事务的ACID"></a>事务的ACID</h3><ul>
+<li>原子性(Atomicity)：事务是数据库的逻辑工作单元，事务中包含的操作要么全部成功，要么全部失败</li>
+<li>一致性(Consistency)：一致性是指在事务开始之前和事务结束之后，数据库的完整性约束没有被破坏。这是说数据库事务不能破坏关系数据的完整性以及业务逻辑上的一致性，例如：a给b转账，不论转账的事务操作是否成功，其两者的存款总额不变(这是业务逻辑的一致性)</li>
+<li>隔离性(Isolation)：一个事务的执行不受其他事务干扰。即一个事务的内部操作及使用的数据对其他并发事务是隔离的，并发执行的各个事务之间不能互相干扰。</li>
+<li>持久性(Durability)：事务一旦提交，它对数据库中的数据的改变应该就是永久性的。接下来其他的操作或故障不应该对其执行结果有任何影响</li>
+</ul>
+<h3 id="脏读、不可重复读、幻读"><a href="#脏读、不可重复读、幻读" class="headerlink" title="脏读、不可重复读、幻读"></a>脏读、不可重复读、幻读</h3><blockquote>
+<p>脏读（读取未提交数据）：a事务读取b事务尚未提交的数据，此时如果b事务发生错误进行了回滚，那么a事务读取到的数据就是脏数据。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>时间顺序</th>
+<th>转账事务</th>
+<th>取款事务</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td></td>
+<td>开始事务</td>
+</tr>
+<tr>
+<td>2</td>
+<td>开始事务</td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td></td>
+<td>查询账号余额为2000元</td>
+</tr>
+<tr>
+<td>4</td>
+<td></td>
+<td>取款1000元，余额被改为1000元</td>
+</tr>
+<tr>
+<td>5</td>
+<td>查询账户余额为1000元(产生脏读)</td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td></td>
+<td>取款操作发生未知错误，事务回滚，余额变为2000元</td>
+</tr>
+<tr>
+<td>7</td>
+<td>转入2000元，余额被更改为3000元(脏读的1000+2000)</td>
+<td></td>
+</tr>
+<tr>
+<td>8</td>
+<td>提交事务</td>
+<td></td>
+</tr>
+<tr>
+<td>备注</td>
+<td>按照正确逻辑，此时账户余额应该为4000元</td>
+<td></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>不可重复读（前后多次读取，数据内容不一致）：事务a在执行读取操作，由于整个事务a比较大，前后读取同一条数据需要经历很长的时间。而在事务a第一次读取数据，比如此时读取了小明的年龄为20，事务b执行更改操作，将小明的年龄更改为30，此时事务a第二次读取到小明的年龄时，返现年龄时30岁，和之前的数据不一样了，也就是数据不重复了，系统不可以读取到重复的数据，成为不可重复读</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>时间顺序</th>
+<th align="left">事务a</th>
+<th>事务b</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td align="left">开始事务</td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td align="left">第一次查询，小明年龄为20岁</td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td align="left"></td>
+<td>开始事务</td>
+</tr>
+<tr>
+<td>4</td>
+<td align="left">其他操作</td>
+<td></td>
+</tr>
+<tr>
+<td>5</td>
+<td align="left"></td>
+<td>更改小明的年龄为30岁</td>
+</tr>
+<tr>
+<td>6</td>
+<td align="left"></td>
+<td>提交事务</td>
+</tr>
+<tr>
+<td>7</td>
+<td align="left">第二次查询，小明年龄为30岁</td>
+<td></td>
+</tr>
+<tr>
+<td>备注</td>
+<td align="left">按照正确逻辑，事务a前后两次读取得到的数据应该一致</td>
+<td></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>幻读（前后多次读取，数据总量不一致）：事务a在执行读取操作，需要两次统计数据的总量，前一次查询数据总量后，此时事务b执行了新增数据的操作并提交后，此时事务a读取的数据总量和之前统计的不一致，就像产生了幻觉一样，平白无故多了几条数据，称为幻读。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>时间顺序</th>
+<th>事务a</th>
+<th>事务b</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>开始事务</td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>第一次查询，数据总量为100条</td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td></td>
+<td>开始事务</td>
+</tr>
+<tr>
+<td>4</td>
+<td>其他操作</td>
+<td></td>
+</tr>
+<tr>
+<td>5</td>
+<td></td>
+<td>新增100条数据</td>
+</tr>
+<tr>
+<td>6</td>
+<td></td>
+<td>提交事务</td>
+</tr>
+<tr>
+<td>7</td>
+<td>第二次查询，数据总量为200条</td>
+<td></td>
+</tr>
+<tr>
+<td>备注</td>
+<td>按照正确逻辑，事务a前后两次读取到的数据总量应该一致</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="MySQL的四种隔离级别"><a href="#MySQL的四种隔离级别" class="headerlink" title="MySQL的四种隔离级别"></a>MySQL的四种隔离级别</h3><blockquote>
+<p>SQL标准定义了四类隔离级别，包括了一些具体规则，用来限定事务内外的哪些改变是可见的，哪些改变是不可见的。低级别的隔离级别一般支持更高的并发处理，并拥有更低的系统开销</p>
+</blockquote>
+<h4 id="Read-Uncommitted-读未提交内容"><a href="#Read-Uncommitted-读未提交内容" class="headerlink" title="Read Uncommitted(读未提交内容)"></a>Read Uncommitted(读未提交内容)</h4><p>在该隔离级别，所有的事务都可以看到其他为未提交事务的执行结果。此隔离级别很少用于实际，因为他的性能不高。读取未提交的数据，也被称为<code>脏读</code></p>
+<h4 id="Read-Committed-读取提交内容"><a href="#Read-Committed-读取提交内容" class="headerlink" title="Read Committed(读取提交内容)"></a>Read Committed(读取提交内容)</h4><p>这是大多数数据库系统默认隔离级别(但不是MySQL默认的)。它满足隔离的简单定义：一个事务只能看到已经提交事务所做的改变，这种隔离级别，也支持所谓的不可重复读，因为同一事务的其他实例在该实例处理期间可能会有新的commit。</p>
+<h4 id="Repeatable-Read-可重读"><a href="#Repeatable-Read-可重读" class="headerlink" title="Repeatable Read(可重读)"></a>Repeatable Read(可重读)</h4><p>这是MySQL的默认事务隔离级别，它确保同一事务的多个实例在并发读取数据时，会看到同样的数据行，不过理论上，这会导致另一个棘手的问题：幻读 。简单的来说，幻读指的是当用户读取某一范围的数据行时，另一个事务又在该范围插入了新行，当用户再次读取的时候，会发现有新的“幻影”行。InnoDB和Falcon存储通过多版本并发控制机制解决了该问题。</p>
+<h4 id="Serializable-可串行化"><a href="#Serializable-可串行化" class="headerlink" title="Serializable(可串行化)"></a>Serializable(可串行化)</h4><p>这是最高的隔离级别，它通过强制事务排序，使之不可能相互冲突，从而解决幻读问题。简言之，它在每个读的数据行上加上共享锁。在这个级别，可能导致大量的超时现象和锁竞争。</p>
+<p>在MySQL中，实现了这四种隔离级别，分别有可能产生问题如下所示：</p>
+<table>
+<thead>
+<tr>
+<th align="left">隔离级别</th>
+<th align="center">脏读</th>
+<th align="center">不可重复读</th>
+<th align="center">幻读</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Read Uncommitted</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">√</td>
+</tr>
+<tr>
+<td align="left">Read committed</td>
+<td align="center">×</td>
+<td align="center">√</td>
+<td align="center">√</td>
+</tr>
+<tr>
+<td align="left">Repeatable read</td>
+<td align="center">×</td>
+<td align="center">×</td>
+<td align="center">√</td>
+</tr>
+<tr>
+<td align="left">Serializable</td>
+<td align="center">×</td>
+<td align="center">×</td>
+<td align="center">×</td>
+</tr>
+</tbody></table>
 
       
 
@@ -266,7 +733,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/04/30/index/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/05/03/MySQL/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -280,11 +747,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/04/30/second/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/05/06/Linux%E7%AC%94%E8%AE%B0%E6%95%B4%E7%90%86/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          second test blog
+          Linux生产最佳实践
         
       </div>
     </a>
